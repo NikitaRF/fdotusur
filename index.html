@@ -156,10 +156,11 @@
             } else if (err2Let[0] == "c"){
                 let resLet = (Number.parseInt(err2Const[1])) + 1
 
-                let resConst = (Number.parseInt(err2Let[1])) + 1
+
                 console.log(`ошибка в позиции ${resLet}`)
-                document.getElementsByClassName('result')[0].innerHTML = `ошибка в позиции ${resConst}`
+                document.getElementsByClassName('result')[0].innerHTML = `ошибка в позиции ${resLet}`
             } else {
+                let resConst = (Number.parseInt(err2Let[1])) + 1
                 console.log(`ошибка в позиции ${resConst}`)
                 document.getElementsByClassName('result')[0].innerHTML = `ошибка в позиции ${resConst}`
             }
