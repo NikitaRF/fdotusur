@@ -32,6 +32,7 @@
     margin: 50px;
     display: flex;
     border: darkgray 2px solid;
+    padding: 15px;
 }
 
 .userText, result{
