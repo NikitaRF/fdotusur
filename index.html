@@ -66,6 +66,7 @@
             if (result == null){
                 console.log(`ошибка в первой позиции`)
                 document.getElementsByClassName('result')[0].innerHTML = "ошибка в первой позиции"
+                inputText.value = ""
                 return false
             }
             let groups = str.match(/(let|const)\s(\D\w*|(?<err>.*))\s=\s\d*/).groups;
