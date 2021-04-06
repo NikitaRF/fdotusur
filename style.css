@@ -24,6 +24,7 @@
 }
 
 .outputBlock{
+    margin: 50px;
     display: flex;
     border: darkgray 2px solid;
 }
