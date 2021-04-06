@@ -24,8 +24,10 @@
 <input type="text" size="80">
 <input type="button" onclick="regExp()" value="Проверить">
 
-
-
+<div class="outputBlock">
+<div class="code"></div>
+<div class="result"></div>
+</div>
 
 <script type="text/javascript">
 
@@ -33,7 +35,12 @@
         let inputText = document.getElementsByTagName("input")[0];
         let textVal = inputText.value;
         console.log(textVal)
+
+
+
+
         textVal = ""
+
     }
 
 </script>

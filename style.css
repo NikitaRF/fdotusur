@@ -22,3 +22,9 @@
 .data{
     display: flex;
 }
+
+.outputBlock{
+    display: flex;
+}
+
+
