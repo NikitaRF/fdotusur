@@ -21,7 +21,7 @@
 </div>
 </div>
 
-<input id="input" type="text" size="80">
+<input type="text" size="80">
 <input type="button" onclick="regExp()" value="Проверить">
 
 
@@ -30,8 +30,10 @@
 <script type="text/javascript">
 
     function regExp(){
+        let inputText = document.getElementsByTagName("input")[0];
+        let textVal = inputText.value;
         alert('Нажали!')
-        alert(document.getElementById("input").innerText)
+        alert(textVal)
     }
 
 </script>
