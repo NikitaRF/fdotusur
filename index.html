@@ -37,6 +37,8 @@
 
 <div class="code">Код программы</div>
 <pre><code class="language-js">
+
+
         function regExp(){
         let inputText = document.getElementsByTagName("input")[0];
         let textVal = inputText.value;
@@ -60,7 +62,7 @@
                     console.log(str[i])
                     if (str[i] == groups.err[0]){
                         for (let j = 0, c = i; j < groups.err.length; j++, c++){
-                            if (str[c] == groups.err[j]){
+                            if (str[c] == groups.err[j] && arrayOfError.length !== groups.err.length){
                                 arrayOfError.push(c)
                                 console.log(`ошибка найдена в позиции ${c}`)
                             }
@@ -89,9 +91,11 @@
             inputText.value = ""
 
             document.getElementsByClassName('userText')[0].innerHTML = textVal
-            document.getElementsByClassName('code')[0].innerHTML = "код"
         }
     }
+
+
+
     </code></pre>
 
 <script type="text/javascript">
@@ -126,7 +130,7 @@
                     console.log(str[i])
                     if (str[i] == groups.err[0]){
                         for (let j = 0, c = i; j < groups.err.length; j++, c++){
-                            if (str[c] == groups.err[j]){
+                            if (str[c] == groups.err[j] && arrayOfError.length !== groups.err.length){
                                 arrayOfError.push(c)
                                 console.log(`ошибка найдена в позиции ${c}`)
                             }
