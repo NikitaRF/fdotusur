@@ -23,6 +23,10 @@
     display: flex;
 }
 
+.inputBlock{
+    margin: 0 auto;
+}
+
 .outputBlock{
     margin: 50px;
     display: flex;
@@ -36,4 +40,5 @@
 .result, code{
     width: 35%;
 }
+
 
