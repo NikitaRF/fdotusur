@@ -4,6 +4,11 @@
     <meta charset="utf-8" />
     <title>Теория языков программирования и методы трансляции</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <!-- and it's easy to individually load additional languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/go.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
 <body>
 <h1 class="title">RegExp</h1>
@@ -29,6 +34,63 @@
     <div class="userText">Вы ввели</div>
     <div class="result">Результат</div>
     <div class="code">Код программы</div>
+    <pre><code class="language-js">
+        function regExp(){
+        let inputText = document.getElementsByTagName("input")[0];
+        let textVal = inputText.value;
+        console.log(textVal)
+        if (textVal !== ""){
+
+
+
+            let str = textVal
+            //"const t = 0;"
+            let result = str.match(/(let|const)\s(\D\w*|(?<err>.*))\s=\s\d*/)
+            let groups = str.match(/(let|const)\s(\D\w*|(?<err>.*))\s=\s\d*/).groups;
+
+            console.log(result)
+            console.log(groups.err)
+            console.log(str.length)
+
+            let arrayOfError = []
+            if(groups.err !== undefined){
+                for (let i = 0; i < str.length; i++){
+                    console.log(str[i])
+                    if (str[i] == groups.err[0]){
+                        for (let j = 0, c = i; j < groups.err.length; j++, c++){
+                            if (str[c] == groups.err[j]){
+                                arrayOfError.push(c)
+                                console.log(`ошибка найдена в позиции ${c}`)
+                            }
+                        }
+                    }
+                }
+            }
+
+            console.log(arrayOfError)
+            if (arrayOfError.length > 0){
+                console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
+                document.getElementsByClassName('result')[0].innerHTML = `ошибка найдена в позиции ${arrayOfError[0]}`
+            } else {
+                console.log(`ошибок не найдено`)
+                document.getElementsByClassName('result')[0].innerHTML = "ошибок не найдено"
+            }
+
+
+
+
+
+
+
+
+
+            inputText.value = ""
+
+            document.getElementsByClassName('userText')[0].innerHTML = textVal
+            document.getElementsByClassName('code')[0].innerHTML = "код"
+        }
+    }
+    </code></pre>
 </div>
 
 
