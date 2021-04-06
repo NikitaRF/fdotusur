@@ -32,7 +32,7 @@
 .outputBlock{
     margin: 50px;
     display: flex;
-    border: darkgray 2px solid;
+    border: darkgray 1px solid;
     padding: 15px;
 }
 
