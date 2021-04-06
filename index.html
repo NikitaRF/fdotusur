@@ -119,7 +119,10 @@
             //"const t = 0;"
             let result = str.match(/(let|const)\s(\D\w*|(?<err>.*))\s=\s\d*/)
             if (result == null){
+                console.log(`ошибка в первой позиции`)
+                document.getElementsByClassName('result')[0].innerHTML = "ошибка в первой позиции"
                 return false
+
             }
             let groups = str.match(/(let|const)\s(\D\w*|(?<err>.*))\s=\s\d*/).groups;
 
