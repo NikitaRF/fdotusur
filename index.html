@@ -44,16 +44,14 @@
         let inputText = document.getElementsByTagName("input")[0];
         let textVal = inputText.value;
         console.log(textVal)
+        if (textVal !== ""){
 
+            inputText.value = ""
 
-
-
-        inputText.value = ""
-
-        document.getElementsByClassName('userText')[0].innerHTML = textVal
-        document.getElementsByClassName('result')[0].innerHTML = "result"
-        document.getElementsByClassName('result')[0].innerHTML = "код"
-
+            document.getElementsByClassName('userText')[0].innerHTML = textVal
+            document.getElementsByClassName('result')[0].innerHTML = "result"
+            document.getElementsByClassName('result')[0].innerHTML = "код"
+        }
     }
 
 </script>
