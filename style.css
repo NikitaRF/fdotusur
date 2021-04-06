@@ -40,10 +40,16 @@
     text-align: center;
 }
 
+.inputArea {
+    height: 30px;
+    box-sizing: border-box;
+}
+
 /* кнопки */
 
 
    .bott{
+       height: 20px;
        font-size: 1.1em;
        text-decoration:none;
        text-align:center;
