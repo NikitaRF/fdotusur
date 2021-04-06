@@ -91,6 +91,20 @@
             }
 
 
+            console.log(arrayOfError)
+            if (arrayOfError.length > 0){
+                console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
+                document.getElementsByClassName('result')[0].innerHTML = `ошибка найдена в позиции ${arrayOfError[0] + 1}`
+            } else {
+                console.log(`ошибок не найдено`)
+                document.getElementsByClassName('result')[0].innerHTML = "ошибок не найдено"
+            }
+
+
+
+
+
+
 
 
 
@@ -178,14 +192,7 @@
 
 
 
-            console.log(arrayOfError)
-            if (arrayOfError.length > 0){
-                console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
-                document.getElementsByClassName('result')[0].innerHTML = `ошибка найдена в позиции ${arrayOfError[0] + 1}`
-            } else {
-                console.log(`ошибок не найдено`)
-                document.getElementsByClassName('result')[0].innerHTML = "ошибок не найдено"
-            }
+
 
 
 
