@@ -15,7 +15,7 @@
     margin-left: 100px;
 }
 
-.example:nth-child(1){
+.example p:nth-child(1){
     font-weight: bold;
 }
 
