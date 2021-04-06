@@ -3,7 +3,7 @@
 }
 
 .fio{
-    margin: 5px;
+
 }
 
 .fio:nth-child(odd){
@@ -12,6 +12,7 @@
 
 .example{
     color: darkgray;
+    margin-left: 100px;
 }
 
 .example:nth-child(1){
