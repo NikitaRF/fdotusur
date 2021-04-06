@@ -57,18 +57,20 @@
             console.log(str.length)
 
             let arrayOfError = []
-
-            for (let i = 0; i < str.length; i++){
-                console.log(str[i])
-                if (str[i] == groups.err[0]){
-                    for (let j = 0, c = i; j < groups.err.length; j++, c++){
-                        if (str[c] == groups.err[j]){
-                            arrayOfError.push(c)
-                            console.log(`ошибка найдена в позиции ${c}`)
+            if(groups.err !== undefined){
+                for (let i = 0; i < str.length; i++){
+                    console.log(str[i])
+                    if (str[i] == groups.err[0]){
+                        for (let j = 0, c = i; j < groups.err.length; j++, c++){
+                            if (str[c] == groups.err[j]){
+                                arrayOfError.push(c)
+                                console.log(`ошибка найдена в позиции ${c}`)
+                            }
                         }
                     }
                 }
             }
+
 
             console.log(arrayOfError)
             console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
