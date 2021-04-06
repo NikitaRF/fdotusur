@@ -43,6 +43,9 @@
 .inputArea {
     height: 30px;
     box-sizing: border-box;
+    border: none;
+    border-bottom: darkgrey 1px solid;
+    border-left: darkgrey 1px solid;
 }
 
 /* кнопки */
