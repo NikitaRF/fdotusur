@@ -28,4 +28,10 @@
     border: darkgray 2px solid;
 }
 
+.userText {
+    width: 30%;
+}
+.result, code{
+    width: 35%;
+}
 
