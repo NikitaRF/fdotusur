@@ -138,13 +138,16 @@
 
             if (err2Let[0] == err2Const[0]){
                 console.log("ошибка в позиции 1")
+                document.getElementsByClassName('result')[0].innerHTML = "ошибка в позиции 1"
             } else if (err2Let[0] == "c"){
                 let resLet = (Number.parseInt(err2Const[1])) + 1
 
                 let resConst = (Number.parseInt(err2Let[1])) + 1
                 console.log(`ошибка в позиции ${resLet}`)
+                document.getElementsByClassName('result')[0].innerHTML = `ошибка в позиции ${resConst}`
             } else {
                 console.log(`ошибка в позиции ${resConst}`)
+                document.getElementsByClassName('result')[0].innerHTML = `ошибка в позиции ${resConst}`
             }
 
             console.log(err2Let)
