@@ -38,73 +38,8 @@
 <div class="code">Код программы</div>
 
 
-<pre><code class="language-js">
-
-
-        function regExp(){
-        let inputText = document.getElementsByTagName("input")[0];
-                let textVal = inputText.value;
-        console.log(textVal)
-        if (textVal !== ""){
-
-
-
-            let str = textVal
-            //"const t = 0;"
-            let result = str.match(/(let|const)\s(\D\w*|(?<err>.*))\s=\s\d*/)
-            if (result == null){
-                console.log(`ошибка в первой позиции`)
-                document.getElementsByClassName('result')[0].innerHTML = "ошибка в первой позиции"
-                return false
-
-            }
-            let groups = str.match(/(let|const)\s(\D\w*|(?<err>.*))\s=\s\d*/).groups;
-
-            console.log(result)
-            console.log(groups.err)
-            console.log(str.length)
-
-            let arrayOfError = []
-            if(groups.err !== undefined){
-                for (let i = 0; i < str.length; i++){
-                    console.log(str[i])
-                    if (str[i] == groups.err[0]){
-                        for (let j = 0, c = i; j < groups.err.length; j++, c++){
-                            if (str[c] == groups.err[j] && arrayOfError.length !== groups.err.length){
-                                arrayOfError.push(c)
-                                console.log(`ошибка найдена в позиции ${c}`)
-                            }
-                        }
-                    }
-                }
-            }
-
-            console.log(arrayOfError)
-            if (arrayOfError.length > 0){
-                console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
-                document.getElementsByClassName('result')[0].innerHTML = `ошибка найдена в позиции ${arrayOfError[0]}`
-            } else {
-                console.log(`ошибок не найдено`)
-                document.getElementsByClassName('result')[0].innerHTML = "ошибок не найдено"
-            }
-
-
-
-
-
-
-
-
-
-            inputText.value = ""
-
-            document.getElementsByClassName('userText')[0].innerHTML = textVal
-        }
-    }
-
-
-
-    </code></pre>
+<pre><code class="language-js">   Код JS
+</code></pre>
 
 <script type="text/javascript">
 
@@ -118,12 +53,11 @@
     }
 
     function regExp(){
-        let x
+
         let inputText = document.getElementsByTagName("input")[0];
-                let textVal = inputText.value;
+        let textVal = inputText.value;
         console.log(textVal)
         if (textVal !== ""){
-
 
 
             let str = textVal
@@ -133,7 +67,6 @@
                 console.log(`ошибка в первой позиции`)
                 document.getElementsByClassName('result')[0].innerHTML = "ошибка в первой позиции"
                 return false
-
             }
             let groups = str.match(/(let|const)\s(\D\w*|(?<err>.*))\s=\s\d*/).groups;
 
