@@ -35,7 +35,7 @@
     padding: 15px;
 }
 
-.userText .result{
+.userText, .result{
     width: 50%;
     text-align: center;
 }
