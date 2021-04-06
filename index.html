@@ -42,7 +42,7 @@
 </code></pre>
 
 <script type="text/javascript">
-
+    // Пример для копипаста      const t = 0;
     document.getElementsByClassName('language-js')[0].innerHTML = regExp
 
     function clearAreas(){
@@ -53,32 +53,39 @@
     }
 
     function regExp(){
+        // по нажатию на кнопку "проверить", запускается функция обработки
 
+        // получаем текст из input и заносим его в переменную textVal
         let inputText = document.getElementsByTagName("input")[0];
         let textVal = inputText.value;
-        console.log(textVal)
+
+        // начинаем проверку, только если поле input было НЕ пустым
         if (textVal !== ""){
 
-
+            // пробрасываем наш текст в переменную str
             let str = textVal
-            //"const t = 0;"
+
+            // проверяем на соответствие с РВ
             let result = str.match(/((let|const)|(?<err2>.*))\s(\D\w*|(?<err>.*))\s=\s\d*/)
+
+            // если что-то идет не так, то прерываем выполнение функции, и выводим текст
             if (result == null){
                 console.log(`ошибка в первой позиции`)
                 document.getElementsByClassName('result')[0].innerHTML = "ошибка в первой позиции"
                 inputText.value = ""
                 return false
             }
+            // заносим в группы "err" несоответсвия выражению RegExp
             let groups = str.match(/((let|const)|(?<err2>.*))\s(\D\w*|(?<err>.*))\s=\s\d*/).groups;
 
-            console.log(result)
-            console.log(groups.err)
-            console.log(str.length)
+            // err (если неправильно назвали переменную):
 
-            let arrayOfError = []
+            let arrayOfError = []  // промежуточная переменная - массив, для накопления ошибок
+
+            // запускаем код, только когда в группу err, что-то попало (доп. защита)
             if(groups.err !== undefined){
+                // запускаем цикл, и пушаем в массив для накомпления ошибок - позиции ошибок
                 for (let i = 0; i < str.length; i++){
-                    console.log(str[i])
                     if (str[i] == groups.err[0]){
                         for (let j = 0, c = i; j < groups.err.length; j++, c++){
                             if (str[c] == groups.err[j] && arrayOfError.length !== groups.err.length){
@@ -91,11 +98,12 @@
             }
 
 
-            console.log(arrayOfError)
+           // если накопитель ошибок пополнился - выводим позицию первой ошибки
             if (arrayOfError.length > 0){
                 console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
                 document.getElementsByClassName('result')[0].innerHTML = `ошибка найдена в позиции ${arrayOfError[0] + 1}`
             } else {
+                // если же накопитель ошибок пуст - то выводим сообщение что ошибок нет
                 console.log(`ошибок не найдено`)
                 document.getElementsByClassName('result')[0].innerHTML = "ошибок не найдено"
             }
@@ -103,7 +111,7 @@
 
 
 
-
+            // err2 (если есть ошибка в объявлении переменной):
 
 
 
@@ -206,9 +214,10 @@
 
 
 
-
+            // в самом конце сбрасываем поле input
             inputText.value = ""
 
+            // записываем последний введенный результат в div, для информативного вывода
             document.getElementsByClassName('userText')[0].innerHTML = textVal
         }
     }
