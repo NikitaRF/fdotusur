@@ -136,11 +136,12 @@
                     // проверяем на let
                     for (let i = 0; i < arrLet.length; i++) {
                         if (err2Let.length == 0) {
-                            console.log(groups.err2[i])
-                            arrLet[i] == groups.err2[i] ? console.log(arrLet[i]) : err2Let = [groups.err2[i], i]
                             if (i == arrLet.length - 1) {
                                 err2Let = [groups.err2[i + 1], i + 1]
                             }
+                            console.log(groups.err2[i])
+                            arrLet[i] == groups.err2[i] ? console.log(arrLet[i]) : err2Let = [groups.err2[i], i]
+
                         }
 
                     }
@@ -148,13 +149,14 @@
                     // проверяем на const
                     for (let i = 0; i < arrConst.length; i++) {
                         if (err2Const.length == 0) {
+                            if (i == arrConst.length - 1) {
+                                err2Const = [groups.err2[i + 1], i + 1]
+                            }
                             console.log(groups.err2[i])
                             arrConst[i] == groups.err2[i] ? console.log(arrConst[i]) : err2Const = [groups.err2[i], i]
                             console.log(i)
                             console.log(arrConst.length)
-                            if (i == arrConst.length - 1) {
-                                err2Const = [groups.err2[i + 1], i + 1]
-                            }
+
                             console.log(err2Const)
                             console.log(121212)
                         }
