@@ -25,6 +25,7 @@
 
 .outputBlock{
     display: flex;
+    border: darkgray 5px solid;
 }
 
 
