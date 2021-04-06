@@ -109,7 +109,7 @@
 
     function regExp(){
         let inputText = document.getElementsByTagName("input")[0];
-        let textVal = inputText.value;
+                let textVal = inputText.value;
         console.log(textVal)
         if (textVal !== ""){
 
@@ -118,6 +118,9 @@
             let str = textVal
             //"const t = 0;"
             let result = str.match(/(let|const)\s(\D\w*|(?<err>.*))\s=\s\d*/)
+            if (result == null){
+                return false
+            }
             let groups = str.match(/(let|const)\s(\D\w*|(?<err>.*))\s=\s\d*/).groups;
 
             console.log(result)
