@@ -113,21 +113,6 @@
 
             // err2 (если есть ошибка в объявлении переменной):
 
-
-
-
-            if(groups.err2 !== undefined) {
-                for (let i = 0; i < str.length; i++) {
-                    if (str[i] == groups.err2[0]) {
-                        for (let j = 0, c = i; j < groups.err2.length; j++, c++) {
-                            if (str[c] == groups.err2[j] && arrayOfError.length !== groups.err2.length) {
-                                arrayOfError.push(c)
-
-                            }
-                        }
-                    }
-                }
-
                 let arrLet = ["l", "e", "t"]
                 let arrConst = ["c", "o", "n", "s", "t"]
                 let err2Let = []
@@ -176,11 +161,6 @@
                     console.log(`ошибка в позиции ${resConst}`)
                     document.getElementsByClassName('result')[0].innerHTML = `ошибка в позиции ${resConst}`
                 }
-
-                console.log(err2Let)
-                console.log(err2Const)
-                console.log(err2Const[1])
-                console.log(err2Let[1])
             }
 
 
