@@ -73,6 +73,8 @@
                 console.log(`ошибка в первой позиции`)
                 document.getElementsByClassName('result')[0].innerHTML = "ошибка в первой позиции"
                 inputText.value = ""
+                // записываем последний введенный результат в div, для информативного вывода
+                document.getElementsByClassName('userText')[0].innerHTML = textVal
                 return false
             }
             // заносим в группы "err" несоответсвия выражению RegExp
