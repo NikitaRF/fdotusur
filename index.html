@@ -72,9 +72,14 @@
                 }
             }
 
-
             console.log(arrayOfError)
-            console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
+            if (arrayOfError.length > 0){
+                console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
+            } else {
+                console.log(`ошибок не найдено`)
+            }
+
+
 
 
 
