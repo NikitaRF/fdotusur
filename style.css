@@ -13,6 +13,7 @@
 .example{
     color: darkgray;
     margin-left: 100px;
+    margin: 0 auto;
 }
 
 .example p:nth-child(1){
