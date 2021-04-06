@@ -5,3 +5,7 @@
 .fio{
     margin: 5px;
 }
+
+.fio:nth-child(odd){
+    font-weight: bold;
+}
