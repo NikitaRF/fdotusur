@@ -48,7 +48,8 @@
 
 
 
-            let str = "const t = 0;"
+            let str = textVal
+            //"const t = 0;"
             let result = str.match(/(let|const)\s(\D\w*|(?<err>.*))\s=\s\d*/)
             let groups = str.match(/(let|const)\s(\D\w*|(?<err>.*))\s=\s\d*/).groups;
 
