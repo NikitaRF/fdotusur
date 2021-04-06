@@ -9,3 +9,11 @@
 .fio:nth-child(odd){
     font-weight: bold;
 }
+
+.example{
+    color: darkgray;
+}
+
+.example:nth-child(1){
+    font-weight: bold;
+}
