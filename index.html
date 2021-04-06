@@ -46,11 +46,44 @@
         console.log(textVal)
         if (textVal !== ""){
 
+
+
+            let str = "const t = 0;"
+            let result = str.match(/(let|const)\s(\D\w*|(?<err>.*))\s=\s\d*/)
+            let groups = str.match(/(let|const)\s(\D\w*|(?<err>.*))\s=\s\d*/).groups;
+
+            console.log(result)
+            console.log(groups.err)
+            console.log(str.length)
+
+            let arrayOfError = []
+
+            for (let i = 0; i < str.length; i++){
+                console.log(str[i])
+                if (str[i] == groups.err[0]){
+                    for (let j = 0, c = i; j < groups.err.length; j++, c++){
+                        if (str[c] == groups.err[j]){
+                            arrayOfError.push(c)
+                            console.log(`ошибка найдена в позиции ${c}`)
+                        }
+                    }
+                }
+            }
+
+            console.log(arrayOfError)
+            console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
+
+
+
+
+
+
+
             inputText.value = ""
 
             document.getElementsByClassName('userText')[0].innerHTML = textVal
             document.getElementsByClassName('result')[0].innerHTML = "result"
-            document.getElementsByClassName('code')[0].innerHTML = "код"
+            document.getElementsByClassName('code')[0].innerHTML = regExp()
         }
     }
 
