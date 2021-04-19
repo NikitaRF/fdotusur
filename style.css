@@ -38,7 +38,8 @@
 
 .userText, .result{
     width: 50%;
-    text-align: center;
+    text-align: left;
+    margin-left: 15%;
 }
 
 .inputArea {

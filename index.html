@@ -269,12 +269,14 @@
                 for (let i = 0; i < countOfStr; i++){
                     console.log(strCount[i])
 
-                   if (regExpMoreString(strCount[i]).length !== 0){
+                   if (regExpMoreString(strCount[i], i).length !== 0){
                        break
                    }
                 }
 
-                function regExpMoreString (str) {
+                function regExpMoreString (str, i) {
+
+                    let numberOfString = i + 1;
 
 
                 // проверяем на соответствие с РВ
@@ -283,7 +285,7 @@
                 // если что-то идет не так, то прерываем выполнение функции, и выводим текст
                 if (result == null){
                     console.log(`ошибка в первой позиции`)
-                    document.getElementsByClassName('result')[0].innerHTML = "ошибка в первой позиции"
+                    document.getElementsByClassName('result')[0].innerHTML = `${numberOfString} строка, ошибка в первой позиции`
                     inputText.value = ""
                     // записываем последний введенный результат в div, для информативного вывода
                     document.getElementsByClassName('userText')[0].innerHTML = textVal
@@ -310,7 +312,7 @@
                             for (let j = 0, c = i; j < groups.err3.length; j++, c++){
                                 if (str[c] == groups.err3[j] && arrayOfError.length !== groups.err3.length){
                                     arrayOfError.push(c)
-                                    console.log(`ошибка найдена в позиции ${c}`)
+                                    console.log(`${numberOfString} строка, ошибка найдена в позиции ${c}`)
                                 }
                             }
                         }
@@ -321,7 +323,7 @@
                 // если накопитель ошибок пополнился - выводим позицию первой ошибки
                 if (arrayOfError.length > 0){
                     console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
-                    document.getElementsByClassName('result')[0].innerHTML = `ошибка найдена в позиции ${arrayOfError[0] + 1}`
+                    document.getElementsByClassName('result')[0].innerHTML = `${numberOfString} строка, ошибка найдена в позиции ${arrayOfError[0] + 1}`
                 } else {
                     // если же накопитель ошибок пуст - то выводим сообщение что ошибок нет
                     console.log(`ошибок не найдено`)
@@ -343,7 +345,7 @@
                             for (let j = 0, c = i; j < groups.err.length; j++, c++){
                                 if (str[c] == groups.err[j] && arrayOfError.length !== groups.err.length){
                                     arrayOfError.push(c)
-                                    console.log(`ошибка найдена в позиции ${c}`)
+                                    console.log(`${numberOfString} строка, ошибка найдена в позиции ${c}`)
                                 }
                             }
                         }
@@ -353,8 +355,8 @@
 
                 // если накопитель ошибок пополнился - выводим позицию первой ошибки
                 if (arrayOfError.length > 0){
-                    console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
-                    document.getElementsByClassName('result')[0].innerHTML = `ошибка найдена в позиции ${arrayOfError[0] + 1}`
+                    console.log(`${numberOfString} строка, ошибка найдена в позиции ${arrayOfError[0]}`)
+                    document.getElementsByClassName('result')[0].innerHTML = `${numberOfString} строка, ошибка найдена в позиции ${arrayOfError[0] + 1}`
                 } else {
                     // если же накопитель ошибок пуст - то выводим сообщение что ошибок нет
                     console.log(`ошибок не найдено`)
@@ -414,16 +416,16 @@
 
                     // определяем, в написании какой именно переменной, была допущена ошибка, и выводим позицию ошибки
                     if (err2Let[0] == err2Const[0]) {
-                        console.log("ошибка в позиции 1")
-                        document.getElementsByClassName('result')[0].innerHTML = "ошибка в позиции 1"
+                        console.log(`${numberOfString} строка, ошибка в позиции 1`)
+                        document.getElementsByClassName('result')[0].innerHTML = "${numberOfString} строка, ошибка в позиции 1"
                     } else if (err2Let[0] == "c") {
                         let resLet = (Number.parseInt(err2Const[1])) + 1
-                        console.log(`ошибка в позиции ${resLet}`)
-                        document.getElementsByClassName('result')[0].innerHTML = `ошибка в позиции ${resLet}`
+                        console.log(` ${numberOfString} строка,ошибка в позиции ${resLet}`)
+                        document.getElementsByClassName('result')[0].innerHTML = `${numberOfString} строка, ошибка в позиции ${resLet}`
                     } else {
                         let resConst = (Number.parseInt(err2Let[1])) + 1
-                        console.log(`ошибка в позиции ${resConst}`)
-                        document.getElementsByClassName('result')[0].innerHTML = `ошибка в позиции ${resConst}`
+                        console.log(`${numberOfString} строка, ошибка в позиции ${resConst}`)
+                        document.getElementsByClassName('result')[0].innerHTML = `${numberOfString} строка, ошибка в позиции ${resConst}`
                     }
                 }
 
@@ -487,7 +489,7 @@
 
 
             // записываем последний введенный результат в div, для информативного вывода
-            document.getElementsByClassName('userText')[0].innerHTML = textVal
+            document.getElementsByClassName('userText')[0].innerHTML = textVal.split('\n').join('<br>')
         }
     }
 
