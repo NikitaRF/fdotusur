@@ -78,11 +78,12 @@
                 return false
             }
             // заносим в группы "err" несоответсвия выражению RegExp
-            let groups = str.match(/((let|const)|(?<err2>.*))\s(\D\w*|(?<err>.*))\s=\s\d*/).groups;
+            let groups = str.match(/((let|const)|(?<err2>.*))\s(([$]|[_]|[$]\D*|[$]\w*|[_]\D*|[_]\w*|\D\w*)|(?<err>.*))\s=\s\d*/).groups;
 
             // err (если неправильно назвали переменную):
 
             let arrayOfError = []  // промежуточная переменная - массив, для накопления ошибок
+            console.log(groups.err)
 
             // запускаем код, только когда в группу err, что-то попало (доп. защита)
             if(groups.err !== undefined){
