@@ -59,162 +59,193 @@
         let inputText = document.getElementsByTagName("textarea")[0];
         let textVal = inputText.value;
 
+
         // начинаем проверку, только если поле input было НЕ пустым
         if (textVal !== ""){
 
             // пробрасываем наш текст в переменную str
             let str = textVal
-            console.log(str)
-
-            // проверяем на соответствие с РВ
-            let result = str.match(/((let|const)|(?<err2>.*))\s(\D\w*|(?<err>.*))\s=\s\d*/)
-
-            // если что-то идет не так, то прерываем выполнение функции, и выводим текст
-            if (result == null){
-                console.log(`ошибка в первой позиции`)
-                document.getElementsByClassName('result')[0].innerHTML = "ошибка в первой позиции"
-                inputText.value = ""
-                // записываем последний введенный результат в div, для информативного вывода
-                document.getElementsByClassName('userText')[0].innerHTML = textVal
-                return false
-            }
-            // заносим в группы "err" несоответсвия выражению RegExp
-            let groups = str.match(/(((\s*)(let|const)|(?<err2>.*))\s(([$]|[_]|[$]\D*|[$]\w*|[_]\D*|[_]\w*|[A-Za-z]\w*)|(?<err>.*))\s=\s((\d*;|".+"|\[(".+"|\d*|\[\])*\])|(?<err3>.*)))*/).groups;
-
-
-            let arrayOfError = []  // промежуточная переменная - массив, для накопления ошибок
 
 
             //
-            // err3 значение переменной
-            //
+            // Если текст многострочный:
+            // _________________________________________________________________________________________________________
 
-            console.log(groups.err3)
-
-            // запускаем код, только когда в группу err3, что-то попало (доп. защита)
-            if(groups.err3 !== undefined){
-                // запускаем цикл, и пушаем в массив для накомпления ошибок - позиции ошибок
-                for (let i = 0; i < str.length; i++){
-                    if (str[i] == groups.err3[0]){
-                        for (let j = 0, c = i; j < groups.err3.length; j++, c++){
-                            if (str[c] == groups.err3[j] && arrayOfError.length !== groups.err3.length){
-                                arrayOfError.push(c)
-                                console.log(`ошибка найдена в позиции ${c}`)
-                            }
-                        }
-                    }
-                }
-            }
-
-
-            // если накопитель ошибок пополнился - выводим позицию первой ошибки
-            if (arrayOfError.length > 0){
-                console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
-                document.getElementsByClassName('result')[0].innerHTML = `ошибка найдена в позиции ${arrayOfError[0] + 1}`
+            let strCount = str.match(/.*\n*/g)
+            console.log(1111)
+            console.log(strCount)
+            if (strCount.length > 2 && strCount[1] !== ""){
+                console.log("многострочный")
             } else {
-                // если же накопитель ошибок пуст - то выводим сообщение что ошибок нет
-                console.log(`ошибок не найдено`)
-                document.getElementsByClassName('result')[0].innerHTML = "ошибок не найдено"
-            }
+                console.log("однострочный")
 
 
-            //
-            // err (если неправильно назвали переменную):
-            //
+                //
+                // Если текст однострочный:
+                // _________________________________________________________________________________________________________
 
-            console.log(groups.err)
+                // проверяем на соответствие с РВ
+                let result = str.match(/(((\s*)(let|const)|(?<err2>.*))\s(([$]|[_]|[$]\D*|[$]\w*|[_]\D*|[_]\w*|[A-Za-z]\w*)|(?<err>.*))\s=\s((\d*;|".+"*;|\[(".+"|\d*|\[\])*\]*;)|(?<err3>.*)))*/)
 
-            // запускаем код, только когда в группу err, что-то попало (доп. защита)
-            if(groups.err !== undefined){
-                // запускаем цикл, и пушаем в массив для накомпления ошибок - позиции ошибок
-                for (let i = 0; i < str.length; i++){
-                    if (str[i] == groups.err[0]){
-                        for (let j = 0, c = i; j < groups.err.length; j++, c++){
-                            if (str[c] == groups.err[j] && arrayOfError.length !== groups.err.length){
-                                arrayOfError.push(c)
-                                console.log(`ошибка найдена в позиции ${c}`)
-                            }
-                        }
-                    }
+                // если что-то идет не так, то прерываем выполнение функции, и выводим текст
+                if (result == null){
+                    console.log(`ошибка в первой позиции`)
+                    document.getElementsByClassName('result')[0].innerHTML = "ошибка в первой позиции"
+                    inputText.value = ""
+                    // записываем последний введенный результат в div, для информативного вывода
+                    document.getElementsByClassName('userText')[0].innerHTML = textVal
+                    return false
                 }
-            }
+                // заносим в группы "err" несоответсвия выражению RegExp
+                let groups = str.match(/(((\s*)(let|const)|(?<err2>.*))\s(([$]|[_]|[$]\D*|[$]\w*|[_]\D*|[_]\w*|[A-Za-z]\w*)|(?<err>.*))\s=\s((\d*;|".+"*;|\[(".+"|\d*|\[\])*\]*;)|(?<err3>.*)))*/).groups;
 
 
-           // если накопитель ошибок пополнился - выводим позицию первой ошибки
-            if (arrayOfError.length > 0){
-                console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
-                document.getElementsByClassName('result')[0].innerHTML = `ошибка найдена в позиции ${arrayOfError[0] + 1}`
-            } else {
-                // если же накопитель ошибок пуст - то выводим сообщение что ошибок нет
-                console.log(`ошибок не найдено`)
-                document.getElementsByClassName('result')[0].innerHTML = "ошибок не найдено"
-            }
+                let arrayOfError = []  // промежуточная переменная - массив, для накопления ошибок
 
 
+                //
+                // err3 значение переменной
+                //
 
-            //
-            // err2 (если есть ошибка в объявлении переменной):
-            //
+                console.log(groups.err3)
 
-            // запускаем код, только когда в группу err2, что-то попало (доп. защита)
-            if(groups.err2 !== undefined) {
-                for (let i = 0; i < str.length; i++) {
-                    if (str[i] == groups.err2[0]) {
-                        for (let j = 0, c = i; j < groups.err2.length; j++, c++) {
-                            if (str[c] == groups.err2[j] && arrayOfError.length !== groups.err2.length) {
-                                arrayOfError.push(c)
+                // запускаем код, только когда в группу err3, что-то попало (доп. защита)
+                if(groups.err3 !== undefined){
+                    // запускаем цикл, и пушаем в массив для накомпления ошибок - позиции ошибок
+                    for (let i = 0; i < str.length; i++){
+                        if (str[i] == groups.err3[0]){
+                            for (let j = 0, c = i; j < groups.err3.length; j++, c++){
+                                if (str[c] == groups.err3[j] && arrayOfError.length !== groups.err3.length){
+                                    arrayOfError.push(c)
+                                    console.log(`ошибка найдена в позиции ${c}`)
+                                }
                             }
                         }
                     }
                 }
 
-                // создаем эталонные значения для сверки с ними
-                let arrLet = ["l", "e", "t"]
-                let arrConst = ["c", "o", "n", "s", "t"]
-                // создаем накопители ошибок
-                let err2Let = []
-                let err2Const = []
 
-                console.log(groups.err2)
-
-                // запускаем циклы сверки c правильностью написания let и const
-                if (groups.err2 !== undefined) {
-
-                    // проверяем на let
-                    for (let i = 0; i < arrLet.length; i++) {
-                        if (err2Let.length == 0) {
-                            if (i == arrLet.length - 1) {
-                                err2Let = [groups.err2[i + 1], i + 1]
-                            }
-                            arrLet[i] == groups.err2[i] ? console.log(arrLet[i]) : err2Let = [groups.err2[i], i]
-                        }
-                    }
-
-                    // проверяем на const
-                    for (let i = 0; i < arrConst.length; i++) {
-                        if (err2Const.length == 0) {
-                            if (i == arrConst.length - 1) {
-                                err2Const = [groups.err2[i + 1], i + 1]
-                            }
-                            arrConst[i] == groups.err2[i] ? console.log(arrConst[i]) : err2Const = [groups.err2[i], i]
-                        }
-                    }
-                }
-
-                // определяем, в написании какой именно переменной, была допущена ошибка, и выводим позицию ошибки
-                if (err2Let[0] == err2Const[0]) {
-                    console.log("ошибка в позиции 1")
-                    document.getElementsByClassName('result')[0].innerHTML = "ошибка в позиции 1"
-                } else if (err2Let[0] == "c") {
-                    let resLet = (Number.parseInt(err2Const[1])) + 1
-                    console.log(`ошибка в позиции ${resLet}`)
-                    document.getElementsByClassName('result')[0].innerHTML = `ошибка в позиции ${resLet}`
+                // если накопитель ошибок пополнился - выводим позицию первой ошибки
+                if (arrayOfError.length > 0){
+                    console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
+                    document.getElementsByClassName('result')[0].innerHTML = `ошибка найдена в позиции ${arrayOfError[0] + 1}`
                 } else {
-                    let resConst = (Number.parseInt(err2Let[1])) + 1
-                    console.log(`ошибка в позиции ${resConst}`)
-                    document.getElementsByClassName('result')[0].innerHTML = `ошибка в позиции ${resConst}`
+                    // если же накопитель ошибок пуст - то выводим сообщение что ошибок нет
+                    console.log(`ошибок не найдено`)
+                    document.getElementsByClassName('result')[0].innerHTML = "ошибок не найдено"
                 }
+
+
+                //
+                // err (если неправильно назвали переменную):
+                //
+
+                console.log(groups.err)
+
+                // запускаем код, только когда в группу err, что-то попало (доп. защита)
+                if(groups.err !== undefined){
+                    // запускаем цикл, и пушаем в массив для накомпления ошибок - позиции ошибок
+                    for (let i = 0; i < str.length; i++){
+                        if (str[i] == groups.err[0]){
+                            for (let j = 0, c = i; j < groups.err.length; j++, c++){
+                                if (str[c] == groups.err[j] && arrayOfError.length !== groups.err.length){
+                                    arrayOfError.push(c)
+                                    console.log(`ошибка найдена в позиции ${c}`)
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                // если накопитель ошибок пополнился - выводим позицию первой ошибки
+                if (arrayOfError.length > 0){
+                    console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
+                    document.getElementsByClassName('result')[0].innerHTML = `ошибка найдена в позиции ${arrayOfError[0] + 1}`
+                } else {
+                    // если же накопитель ошибок пуст - то выводим сообщение что ошибок нет
+                    console.log(`ошибок не найдено`)
+                    document.getElementsByClassName('result')[0].innerHTML = "ошибок не найдено"
+                }
+
+
+
+                //
+                // err2 (если есть ошибка в объявлении переменной):
+                //
+
+                // запускаем код, только когда в группу err2, что-то попало (доп. защита)
+                if(groups.err2 !== undefined) {
+                    for (let i = 0; i < str.length; i++) {
+                        if (str[i] == groups.err2[0]) {
+                            for (let j = 0, c = i; j < groups.err2.length; j++, c++) {
+                                if (str[c] == groups.err2[j] && arrayOfError.length !== groups.err2.length) {
+                                    arrayOfError.push(c)
+                                }
+                            }
+                        }
+                    }
+
+                    // создаем эталонные значения для сверки с ними
+                    let arrLet = ["l", "e", "t"]
+                    let arrConst = ["c", "o", "n", "s", "t"]
+                    // создаем накопители ошибок
+                    let err2Let = []
+                    let err2Const = []
+
+                    console.log(groups.err2)
+
+                    // запускаем циклы сверки c правильностью написания let и const
+                    if (groups.err2 !== undefined) {
+
+                        // проверяем на let
+                        for (let i = 0; i < arrLet.length; i++) {
+                            if (err2Let.length == 0) {
+                                if (i == arrLet.length - 1) {
+                                    err2Let = [groups.err2[i + 1], i + 1]
+                                }
+                                arrLet[i] == groups.err2[i] ? console.log(arrLet[i]) : err2Let = [groups.err2[i], i]
+                            }
+                        }
+
+                        // проверяем на const
+                        for (let i = 0; i < arrConst.length; i++) {
+                            if (err2Const.length == 0) {
+                                if (i == arrConst.length - 1) {
+                                    err2Const = [groups.err2[i + 1], i + 1]
+                                }
+                                arrConst[i] == groups.err2[i] ? console.log(arrConst[i]) : err2Const = [groups.err2[i], i]
+                            }
+                        }
+                    }
+
+                    // определяем, в написании какой именно переменной, была допущена ошибка, и выводим позицию ошибки
+                    if (err2Let[0] == err2Const[0]) {
+                        console.log("ошибка в позиции 1")
+                        document.getElementsByClassName('result')[0].innerHTML = "ошибка в позиции 1"
+                    } else if (err2Let[0] == "c") {
+                        let resLet = (Number.parseInt(err2Const[1])) + 1
+                        console.log(`ошибка в позиции ${resLet}`)
+                        document.getElementsByClassName('result')[0].innerHTML = `ошибка в позиции ${resLet}`
+                    } else {
+                        let resConst = (Number.parseInt(err2Let[1])) + 1
+                        console.log(`ошибка в позиции ${resConst}`)
+                        document.getElementsByClassName('result')[0].innerHTML = `ошибка в позиции ${resConst}`
+                    }
+                }
+
+
+
+
+
+
+
             }
+
+
+
+
+
 
 
 
