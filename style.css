@@ -42,7 +42,8 @@
 }
 
 .inputArea {
-    height: 30px;
+    height: 130px;
+    width: 300px;
     box-sizing: border-box;
     border: none;
     border-bottom: darkgrey 1px solid;
