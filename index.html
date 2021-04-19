@@ -25,7 +25,7 @@
 </div>
 </div>
 <div class="inputBlock">
-    <input class="inputArea" type="text" size="80">
+    <textarea class="inputArea" type="text" size="80"></textarea>
     <input class="bott" type="button" onclick="regExp()" value="Проверить">
     <input class="bott" type="button" onclick="clearAreas()" value="Сбросить">
 </div>
@@ -49,14 +49,14 @@
         document.getElementsByClassName('userText')[0].innerHTML = "Вы ввели"
         document.getElementsByClassName('result')[0].innerHTML = "Результат"
         document.getElementsByClassName('code')[0].innerHTML = "Код программы"
-        document.getElementsByTagName("input")[0].value = ""
+        document.getElementsByTagName("textarea")[0].value = ""
     }
 
     function regExp(){
         // по нажатию на кнопку "проверить", запускается функция обработки
 
         // получаем текст из input и заносим его в переменную textVal
-        let inputText = document.getElementsByTagName("input")[0];
+        let inputText = document.getElementsByTagName("textarea")[0];
         let textVal = inputText.value;
 
         // начинаем проверку, только если поле input было НЕ пустым
@@ -64,6 +64,7 @@
 
             // пробрасываем наш текст в переменную str
             let str = textVal
+            console.log(str)
 
             // проверяем на соответствие с РВ
             let result = str.match(/((let|const)|(?<err2>.*))\s(\D\w*|(?<err>.*))\s=\s\d*/)
@@ -78,11 +79,50 @@
                 return false
             }
             // заносим в группы "err" несоответсвия выражению RegExp
-            let groups = str.match(/((let|const)|(?<err2>.*))\s(\D\w*|(?<err>.*))\s=\s\d*/).groups;
+            let groups = str.match(/(((\s*)(let|const)|(?<err2>.*))\s(([$]|[_]|[$]\D*|[$]\w*|[_]\D*|[_]\w*|[A-Za-z]\w*)|(?<err>.*))\s=\s((\d*;|".+"|\[(".+"|\d*|\[\])*\])|(?<err3>.*)))*/).groups;
 
-            // err (если неправильно назвали переменную):
 
             let arrayOfError = []  // промежуточная переменная - массив, для накопления ошибок
+
+
+            //
+            // err3 значение переменной
+            //
+
+            console.log(groups.err3)
+
+            // запускаем код, только когда в группу err3, что-то попало (доп. защита)
+            if(groups.err3 !== undefined){
+                // запускаем цикл, и пушаем в массив для накомпления ошибок - позиции ошибок
+                for (let i = 0; i < str.length; i++){
+                    if (str[i] == groups.err3[0]){
+                        for (let j = 0, c = i; j < groups.err3.length; j++, c++){
+                            if (str[c] == groups.err3[j] && arrayOfError.length !== groups.err3.length){
+                                arrayOfError.push(c)
+                                console.log(`ошибка найдена в позиции ${c}`)
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            // если накопитель ошибок пополнился - выводим позицию первой ошибки
+            if (arrayOfError.length > 0){
+                console.log(`ошибка найдена в позиции ${arrayOfError[0]}`)
+                document.getElementsByClassName('result')[0].innerHTML = `ошибка найдена в позиции ${arrayOfError[0] + 1}`
+            } else {
+                // если же накопитель ошибок пуст - то выводим сообщение что ошибок нет
+                console.log(`ошибок не найдено`)
+                document.getElementsByClassName('result')[0].innerHTML = "ошибок не найдено"
+            }
+
+
+            //
+            // err (если неправильно назвали переменную):
+            //
+
+            console.log(groups.err)
 
             // запускаем код, только когда в группу err, что-то попало (доп. защита)
             if(groups.err !== undefined){
@@ -112,9 +152,9 @@
 
 
 
-
+            //
             // err2 (если есть ошибка в объявлении переменной):
-
+            //
 
             // запускаем код, только когда в группу err2, что-то попало (доп. защита)
             if(groups.err2 !== undefined) {
@@ -134,6 +174,9 @@
                 // создаем накопители ошибок
                 let err2Let = []
                 let err2Const = []
+
+                console.log(groups.err2)
+
                 // запускаем циклы сверки c правильностью написания let и const
                 if (groups.err2 !== undefined) {
 
