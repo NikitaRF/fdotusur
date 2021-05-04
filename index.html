@@ -72,6 +72,8 @@
             let strCount = str.match(/.*\s?/g)
             console.log(strCount)
 
+
+
             if (strCount.length <= 2 && strCount[1] == ""){
                 console.log("однострочный")
 
@@ -107,7 +109,8 @@
                 // запускаем код, только когда в группу err3, что-то попало (доп. защита)
                 if(groups.err3 !== undefined){
                     // запускаем цикл, и пушаем в массив для накомпления ошибок - позиции ошибок
-                    for (let i = 0; i < str.length; i++){
+                    // p.s. запускаем сверку с 5-ого символа, чтобы ошибочно не указать на позицию в словах let или const в начале.
+                    for (let i = 5; i < str.length; i++){
                         if (str[i] == groups.err3[0]){
                             for (let j = 0, c = i; j < groups.err3.length; j++, c++){
                                 if (str[c] == groups.err3[j] && arrayOfError.length !== groups.err3.length){
@@ -261,6 +264,24 @@
                 //
                 // Если текст многострочный:
                 // _____________________________________________________________________________________________________
+
+
+
+
+
+                //
+                // Проверка на повторяющиеся имена переменных:
+                //
+
+                let dublicatOfName = str.matchAll(/(?:let|const)\s(?<names>.*?)\s=/g);
+                console.log("Имена переменных")
+                console.log(dublicatOfName.names)
+                for(let result of dublicatOfName) {
+
+
+                    console.log(result.groups.names);
+
+                }
 
 
                 let countOfStr = strCount.length
