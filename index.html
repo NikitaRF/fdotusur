@@ -438,7 +438,7 @@
                     // определяем, в написании какой именно переменной, была допущена ошибка, и выводим позицию ошибки
                     if (err2Let[0] == err2Const[0]) {
                         console.log(`${numberOfString} строка, ошибка в позиции 1`)
-                        document.getElementsByClassName('result')[0].innerHTML = "${numberOfString} строка, ошибка в позиции 1"
+                        document.getElementsByClassName('result')[0].innerHTML = `${numberOfString} строка, ошибка в позиции 1`
                     } else if (err2Let[0] == "c") {
                         let resLet = (Number.parseInt(err2Const[1])) + 1
                         console.log(` ${numberOfString} строка,ошибка в позиции ${resLet}`)
