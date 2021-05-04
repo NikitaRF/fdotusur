@@ -33,6 +33,7 @@
 <div class="outputBlock">
     <div class="userText">Вы ввели</div>
     <div class="result">Результат</div>
+    <div class="result2"></div>
 </div>
 
 <div class="code">Код программы</div>
@@ -48,6 +49,7 @@
     function clearAreas(){
         document.getElementsByClassName('userText')[0].innerHTML = "Вы ввели"
         document.getElementsByClassName('result')[0].innerHTML = "Результат"
+        document.getElementsByClassName('result2')[0].innerHTML = ""
         document.getElementsByClassName('code')[0].innerHTML = "Код программы"
         document.getElementsByTagName("textarea")[0].value = ""
     }
@@ -265,7 +267,7 @@
                 // Если текст многострочный:
                 // _____________________________________________________________________________________________________
 
-
+                document.getElementsByClassName('result2')[0].innerHTML = ""
 
 
 
@@ -273,15 +275,35 @@
                 // Проверка на повторяющиеся имена переменных:
                 //
 
+                // РВ которое выбирает и группирует только имена переменных
                 let dublicatOfName = str.matchAll(/(?:let|const)\s(?<names>.*?)\s=/g);
                 console.log("Имена переменных")
-                console.log(dublicatOfName.names)
+
+                // проходимся циклом по вхождениям, и пушаем в массив имена всех переменных
+                // в итоге получаем объект, с повторяюзейся переменной и номером строки, где она повторяется
+                let arrayOfVariables = [];
+                let numberOfString = 0;
+                let resultOfDublicat = {
+                    name: "",
+                    numberOfString: "",
+                };
                 for(let result of dublicatOfName) {
-
-
-                    console.log(result.groups.names);
-
+                    numberOfString += 1;
+                    let name = result.groups.names;
+                    if (arrayOfVariables.indexOf(name) !== -1){
+                        resultOfDublicat.name = name;
+                        resultOfDublicat.numberOfString = numberOfString;
+                        console.log(`Повторяющаеся переменная ${resultOfDublicat.name} в строке номер ${resultOfDublicat.numberOfString}`)
+                        break
+                    }
+                    arrayOfVariables.push(name);
                 }
+
+
+
+
+
+
 
 
                 let countOfStr = strCount.length
@@ -298,6 +320,14 @@
                 function regExpMoreString (str, i) {
 
                     let numberOfString = i + 1;
+
+                    // каждый раз как мы проходимся по строке, мы проверяем эту строку, на ту, в которой есть дубликат переменной
+                    if (resultOfDublicat.numberOfString == numberOfString){
+                        console.log(`Строка ${numberOfString} обнаружена дублирующая переменная ${resultOfDublicat.name} в позиции ${str.indexOf(resultOfDublicat.name, 4) + 1}`)
+                        document.getElementsByClassName('result2')[0].innerHTML = `В строке ${numberOfString} обнаружена дублирующая переменная ${resultOfDublicat.name} в позиции ${str.indexOf(resultOfDublicat.name, 4) + 1}`
+                    }
+
+
 
 
                 // проверяем на соответствие с РВ
